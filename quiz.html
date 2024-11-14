@@ -21,7 +21,7 @@
             color: #333;
         }
 
-        .background-img {
+        /* .background-img {
             height: 90vh;
             width: 80vw;
             background-image: url('back.jpg');
@@ -32,12 +32,26 @@
             align-items: center;
             border-radius: 2rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
+        } */
+
+        #timer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff4d4d;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    width: 120px;
+    margin: 0 auto 1rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 
         .container {
             width: 70%;
             max-width: 600px;
-            background-color: #ffffffcc; /* semi-transparent white */
+            background-color: #ffffffcc; 
             color: #1f2847;
             border: none;
             border-radius: 2rem;
@@ -79,7 +93,7 @@
             border: none;
             border-radius: 1rem;
             cursor: pointer;
-            display: none; /* initially hidden */
+            display: none; 
             transition: background-color 0.3s;
         }
 
@@ -95,6 +109,7 @@
 </head>
 <body>
    <div class="background-img">
+    <div id="timer">60:00</div>
     <div class="container">
         <div class="question"></div>
         <div class="answer"></div>
@@ -102,72 +117,143 @@
     </div>
    </div>
     <script>
-        const questionEl = document.querySelector(".question"); 
-        const answerEl = document.querySelector(".answer"); 
-        const nextButton = document.getElementById("nextbutton");
+  const questionEl = document.querySelector(".question"); 
+const answerEl = document.querySelector(".answer"); 
+const nextButton = document.getElementById("nextbutton");
+const timerEl = document.getElementById("timer");
 
-        const questionsForquiz = [
+const questionsForquiz = [
+ {
+  question: "What is the capital of France?",
+  answers: ["Paris", "London", "Berlin", "Madrid"],
+ correct: 0
+ },
             {
-                question: "What is the capital of France?",
-                answers: ["Paris", "London", "Berlin", "Madrid"],
-                correct: 0
-            },
-            {
-                question: "What is 2 + 2?",
-                answers: ["3", "4", "5", "6"],
-                correct: 1
-            },
-            {
-                question: "Which planet is known as the Red Planet?",
-                answers: ["Earth", "Venus", "Mars", "Jupiter"],
-                correct: 2
-            },
-            {
-                question: "What is the largest ocean on Earth?",
-                answers: ["Indian Ocean", "Atlantic Ocean", "Southern Ocean", "Pacific Ocean"],
-                correct: 3
-            }
+    question: "Who wrote the play 'Romeo and Juliet'?",
+    answers: ["Charles Dickens", "Mark Twain", "William Shakespeare", "J.K. Rowling"],
+    correct: 2
+},
+{
+    question: "What is the chemical symbol for water?",
+    answers: ["O2", "H2O", "CO2", "NaCl"],
+    correct: 1
+},
+{
+    question: "What is the largest planet in our Solar System?",
+    answers: ["Earth", "Mars", "Jupiter", "Saturn"],
+    correct: 2
+},
+{
+    question: "Which element has the atomic number 1?",
+    answers: ["Helium", "Hydrogen", "Oxygen", "Carbon"],
+    correct: 1
+},
+{
+    question: "What year did World War II end?",
+    answers: ["1941", "1945", "1950", "1960"],
+    correct: 1
+},
+{
+    question: "Which country is known as the Land of the Rising Sun?",
+    answers: ["China", "Japan", "India", "South Korea"],
+    correct: 1
+},
+{
+    question: "How many continents are there on Earth?",
+    answers: ["5", "6", "7", "8"],
+    correct: 2
+},
+{
+    question: "What is the hardest natural substance on Earth?",
+    answers: ["Gold", "Iron", "Diamond", "Silver"],
+    correct: 2
+},
+{
+    question: "Who painted the Mona Lisa?",
+    answers: ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"],
+    correct: 1
+},
+{
+    question: "What is the main ingredient in guacamole?",
+    answers: ["Tomato", "Avocado", "Pepper", "Onion"],
+    correct: 1
+}
+
         ];
 
-        let currentQuestionIndex = 0;
-        let score = 0;
+let currentQuestionIndex = 0;
+let score = 0;
+let timeRemaining = 60;
+let countdown; // Holds the timer interval
 
-        function loadQuestion() {
-            nextButton.style.display = "none";  
-            answerEl.innerHTML = '';  
+// Start timer with reset functionality for each question
+function startTimer() {
+    clearInterval(countdown); // Clear any existing interval
+    timeRemaining = 60; // Reset to 60 seconds
+    updateTimerDisplay();
 
-            const currentQuestion = questionsForquiz[currentQuestionIndex];
-            questionEl.innerText = currentQuestion.question;  
+    countdown = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
 
-            currentQuestion.answers.forEach((answer, index) => {
-                const button = document.createElement('button');
-                button.textContent = answer;
-                button.addEventListener("click", () => {
-                    if (index === currentQuestion.correct) {
-                        score++;
-                    }
-                    nextButton.style.display = "block"; 
-                });
-                answerEl.appendChild(button);  
-            });
+        if (timeRemaining <= 0) {
+            clearInterval(countdown);
+            nextQuestion(); // Move to the next question automatically
         }
+    }, 1000);
+}
 
-        function nextQuestion() {
-            currentQuestionIndex++;  
-            if (currentQuestionIndex < questionsForquiz.length) {
-                loadQuestion();  
-            } else {
-                showResult();  
+// Update the timer display
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    timerEl.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    
+    // Change color to red if under 10 seconds remaining
+    timerEl.style.color = timeRemaining < 10 ? "#ff3333" : "#ff4d4d";
+}
+
+function loadQuestion() {
+    nextButton.style.display = "none";
+    answerEl.innerHTML = ''; 
+
+    const currentQuestion = questionsForquiz[currentQuestionIndex];
+    questionEl.innerText = currentQuestion.question;
+
+    currentQuestion.answers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.textContent = answer;
+        button.addEventListener("click", () => {
+            if (index === currentQuestion.correct) {
+                score++;
             }
-        }
+            nextButton.style.display = "block"; // Show 'Next' button
+            clearInterval(countdown); // Stop timer on answer selection
+        });
+        answerEl.appendChild(button);
+    });
 
-        function showResult() {
-            const container = document.querySelector('.container');
-            container.innerHTML = `<h1 class="result">Your Score: ${score}/${questionsForquiz.length}</h1>`;  
-        }
+    startTimer(); // Start timer for each question
+}
 
-        nextButton.addEventListener("click", nextQuestion); 
-        loadQuestion();
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questionsForquiz.length) {
+        loadQuestion(); // Load the next question
+    } else {
+        showResult(); // Show final score if no more questions
+    }
+}
+
+function showResult() {
+    clearInterval(countdown); // Stop the timer
+    const container = document.querySelector('.container');
+    container.innerHTML = `<h1 class="result">Your Score: ${score}/${questionsForquiz.length}</h1>`;
+}
+
+nextButton.addEventListener("click", nextQuestion); 
+loadQuestion(); // Load the first question on page load
+
     </script>
 </body>
 </html>
