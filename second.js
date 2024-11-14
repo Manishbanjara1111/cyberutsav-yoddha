@@ -12,7 +12,7 @@ const categories = {
   },
   {
       question: "Find the value of K so that 4x^2 - 17x + k = 0 has reciprocal roots.",
-      options: ["0", "none", "4", "-4"],
+      options: ["0", "4", "-4","none"],
       correct: 2
   },
   {
@@ -71,25 +71,27 @@ const categories = {
   ],
   sports: [
     {
-      question: "Who is known as the king of justice in the history of Nepal?",
-      options: ["Prithivi Narayan Shah", "Ram Shah", "Gyanendra Shah", "Pratap Malla"],
-      correct: 1
+      question: "Who won the FIFA World Cup in 2018?",
+      options: ["Germany", "Brazil", "France", "Argentina"],
+      correct: 2
   },
   {
-      question: "Which king of Nepal died while watching Harisiddhi Dance?",
-      options: ["Siddhi Narsingh Malla", "Pratap Malla", "Abhaya Malla", "Gyanendra Shah"],
-      correct: 1
-  },
-  {
-      question: "Who introduced the Manapathi system in the history of Nepal?",
-      options: ["Pratap Malla", "King Jaysthiith Malla", "Gyanendra Shah", "Prithivi Narayan Shah"],
-      correct: 1
-  },
-  {
-      question: "Who is known as the memory king of Nepal?",
-      options: ["Nabal Pajiyar", "Bijay Sahi", "Gyanendra Shah", "Ram Shah"],
+      question: "Which country has won the most Olympic gold medals in basketball?",
+      options: ["USA", "Russia", "Australia", "Spain"],
       correct: 0
-  }
+  },
+  
+  {
+    question: "Who won the FIFA World Cup in 2018?",
+    options: ["Germany", "Brazil", "France", "Argentina"],
+    correct: 2
+},
+{
+    question: "Which country has won the most Olympic gold medals in basketball?",
+    options: ["USA", "Russia", "Australia", "Spain"],
+    correct: 0
+},
+
   
   ]
 };
