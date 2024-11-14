@@ -21,19 +21,6 @@
             color: #333;
         }
 
-        /* .background-img {
-            height: 90vh;
-            width: 80vw;
-            background-image: url('back.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        } */
-
         #timer {
     font-size: 2rem;
     font-weight: bold;
@@ -45,7 +32,35 @@
     margin: 0 auto 1rem;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .progress-container {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#timer {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff4d4d;
+}
+
+.progress-ring__circle {
+    fill: transparent;
+    stroke: #4e5d83;
+    stroke-width: 10;
+    stroke-dasharray: 377; /* Circumference of circle = 2 * Math.PI * radius */
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s linear;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
 
 
         .container {
@@ -109,8 +124,16 @@
 </head>
 <body>
    <div class="background-img">
-    <div id="timer">60:00</div>
+   
     <div class="container">
+        <div class="progress-container">
+            <svg class="progress-ring" width="140" height="140">
+                <circle class="progress-ring__circle" cx="70" cy="70" r="60" />
+            </svg>
+            <div id="timer">60:00</div>
+        </div>
+        
+        <div id="timer">60:00</div>   
         <div class="question"></div>
         <div class="answer"></div>
         <button id="nextbutton">Next</button>
@@ -202,6 +225,43 @@ function startTimer() {
         }
     }, 1000);
 }
+
+const fullCircle = 2 * Math.PI * 60; // Circumference based on the radius (60)
+document.querySelector(".progress-ring__circle").style.strokeDasharray = fullCircle;
+
+function startTimer() {
+    clearInterval(countdown);
+    timeRemaining = 60;
+    updateTimerDisplay();
+    setProgress(100); // Reset progress to full for each question
+
+    countdown = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        const progress = (timeRemaining / 60) * 100; // Calculate percentage
+        setProgress(progress);
+
+        if (timeRemaining <= 0) {
+            clearInterval(countdown);
+            nextQuestion();
+        }
+    }, 1000);
+}
+
+// Update the progress circle based on time remaining
+function setProgress(percent) {
+    const offset = fullCircle * (1 - percent / 100);
+    document.querySelector(".progress-ring__circle").style.strokeDashoffset = offset;
+}
+
+// Call this function when updating the timer display
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    timerEl.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    timerEl.style.color = timeRemaining < 10 ? "#ff3333" : "#ff4d4d";
+}
+
 
 // Update the timer display
 function updateTimerDisplay() {
