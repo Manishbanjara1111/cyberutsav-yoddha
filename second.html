@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  <link rel="stylesheet" href="second.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <header>
+      <h1>Quiz Game</h1>
+      <p>Choose a category to start:</p>
+    </header>
+
+    <div class="category-buttons">
+      <button class="category-btn" id="math-btn">Math</button>
+      <button class="category-btn" id="history-btn">History</button>
+      <button class="category-btn" id="computer-btn">Computer</button>
+      <button class="category-btn" id="sports-btn">Sports</button>
+    </div>
+
+    <div class="quiz-section" id="quiz-section">
+      <div id="question-container">
+        <p id="question"></p>
+        <div id="options"></div>
+      </div>
+      <button id="next-btn" class="next-btn">Next</button>
+    </div>
+
+    <div id="result" style="display: none;">
+      <p id="score"></p>
+      <button id="play-again-btn" >Restart</button>
+    </div>
+  </div>
+<script src="second.js"></script>
+ 
+</body>
+</html>

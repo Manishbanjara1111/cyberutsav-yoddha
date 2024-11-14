@@ -1,0 +1,130 @@
+
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url(aaaa.avif);
+  background-size: cover;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.quiz-container {
+  width: 90%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+header h1 {
+  font-size: 2.8em;
+  color: #ffcc29;
+  margin-bottom: 0.5rem;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+}
+
+header p {
+  font-size: 1.5em;
+  margin-bottom: 1.5rem;
+}
+
+.category-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.category-btn {
+  padding: 20px 30px;
+  background-color: #ff0066;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5em;
+  color: white;
+  cursor: pointer;
+}
+
+.category-btn:hover {
+  transform: scale(1.05);
+  background-color: #8a00d4;
+}
+
+.quiz-section {
+  display: none;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+#question-container p {
+  font-size: 1.5em;
+  margin-bottom: 1rem;
+}
+
+#options button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  background-color: #ff0066;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#options button:hover {
+  background-color: #8a00d4;
+}
+
+#next-btn {
+  padding: 10px 20px;
+  background-color: #8a00d4;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 20px;
+  color: white;
+}
+
+#next-btn:hover {
+  background-color: #ff0066;
+}
+
+#result {
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+#result button {
+  background-color: #ff0066;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 10px;
+  color: rgb(61, 61, 61);
+  cursor: pointer;
+  margin-left: 145px;
+  margin-top: 20px;
+}
+
+#result button:hover {
+  background-color: #8a00d4;
+}
+
